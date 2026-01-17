@@ -237,9 +237,57 @@ async function handleSend(isVoice = false) {
             appendMessage('bot', "I'm not sure how to respond to that. Can you try rephrasing?");
         }
     } catch (err) {
+        console.warn("Rasa Server unreachable, using local fallback.");
         removeLoader(loaderId);
-        appendMessage('bot', "Error: I couldn't connect to the server. Please check if Rasa is running.");
+
+        // Local Fallback Logic
+        const localReply = getLocalResponse(text);
+        await simulateTyping('bot', localReply);
+        if (isVoice) speakText(localReply);
     }
+}
+
+function getLocalResponse(msg) {
+    const input = msg.toLowerCase();
+
+    // Greetings
+    if (input.match(/\b(hi|hello|hey|greetings|yo)\b/)) {
+        return "Hello! I'm currently in basic mode, but I can still help you with tips and advice. How are you today?";
+    }
+
+    // Health Tips
+    if (input.match(/\b(health|tip|fit|fitness|healthy)\b/)) {
+        const tips = [
+            "Stay hydrated! Aim for at least 8 glasses of water daily.",
+            "Take a 20-minute walk outside; it's great for your mind and body.",
+            "Try to get 7-9 hours of sleep to keep your energy levels high.",
+            "Eat more whole foods and less processed sugar for better focus."
+        ];
+        return tips[Math.floor(Math.random() * tips.length)];
+    }
+
+    // Advice
+    if (input.match(/\b(advice|suggest|help|decision|wisdom)\b/)) {
+        const advice = [
+            "Consistency is more important than perfection. Keep going!",
+            "Take it one day at a time. Big goals are reached through small steps.",
+            "Focus on what you can control, and don't stress the rest.",
+            "Never stop learning. Every day is a new opportunity to grow."
+        ];
+        return advice[Math.floor(Math.random() * advice.length)];
+    }
+
+    // Compliments / Thanks
+    if (input.match(/\b(thanks|thank you|great|good|awesome|amazing|helpful)\b/)) {
+        return "You're very welcome! I'm happy to be here for you.";
+    }
+
+    // Goodbye
+    if (input.match(/\b(bye|goodbye|see you|later|night)\b/)) {
+        return "Goodbye! Have a wonderful day ahead.";
+    }
+
+    return "I'm currently in a limited offline mode, but I can give you health tips or some advice! What would you like to hear about?";
 }
 
 async function fetchRasa(message) {
