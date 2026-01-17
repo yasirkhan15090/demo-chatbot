@@ -1,5 +1,5 @@
 const CONFIG = {
-    RASA_API_URL: "http://localhost:5005/webhooks/rest/webhook",
+    RASA_API_URL: "http://127.0.0.1:5005/webhooks/rest/webhook",
     SENDER_ID: "gym_user_" + Math.random().toString(36).substring(7)
 };
 
@@ -59,7 +59,7 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 
         if (finalTranscript) {
             userInput.value = finalTranscript;
-            handleSend();
+            handleSend(true);
         } else {
             userInput.value = interimTranscript;
         }
@@ -146,11 +146,11 @@ function init() {
     userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            handleSend();
+            handleSend(false);
         }
     });
 
-    sendBtn.addEventListener('click', handleSend);
+    sendBtn.addEventListener('click', () => handleSend(false));
 
     if (micBtn) {
         micBtn.addEventListener('click', toggleSpeech);
@@ -202,7 +202,7 @@ window.toggleMessageFeedback = function (btn, rating) {
     console.log(`Message rated as ${rating}`);
 };
 
-async function handleSend() {
+async function handleSend(isVoice = false) {
     const text = userInput.value.trim();
     if (!text) return;
 
@@ -232,7 +232,7 @@ async function handleSend() {
                 }
                 if (reply.image) appendImage('bot', reply.image);
             }
-            if (fullText) speakText(fullText.trim());
+            if (fullText && isVoice) speakText(fullText.trim());
         } else {
             appendMessage('bot', "I'm not sure how to respond to that. Can you try rephrasing?");
         }
