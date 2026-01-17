@@ -28,3 +28,18 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: health tip story
+  steps:
+  - intent: ask_health_tip
+  - action: utter_health_tip
+
+- story: advice story
+  steps:
+  - intent: ask_advice
+  - action: utter_advice
+
+- story: compliment story
+  steps:
+  - intent: compliment
+  - action: utter_compliment_response
