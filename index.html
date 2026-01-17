@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY AI | Smart Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Background page simulation -->
+    <header class="site-header-demo">
+        <div class="logo">Your Website</div>
+        <nav>
+            <span>Programs</span>
+            <span>abc</span>
+            <span>dfgsdfg</span>
+        </nav>
+    </header>
+
+    <div class="page-placeholder">
+        <div class="hero-demo">
+            <h1>Transform Your Life With Expert AI Coaching</h1>
+            <p>Our AI assistant is here to help you reach your goals faster.</p>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="chat-fab" id="chatFab">
+        <span class="fab-text">MY AI</span>
+        <div class="fab-icon">
+            <i class=""></i>
+        </div>
+    </div>
+
+    <!-- Chat Widget Container -->
+    <div class="chat-widget" id="chatWidget">
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="header-left">
+                <div class="bot-logo">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="bot-info">
+                    <span class="bot-name">MY AI</span>
+                    <div class="bot-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="end-chat-btn" id="endChatBtn" style="display : none">End Session</button>
+                <button class="collapse-btn" id="collapseBtn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Area -->
+        <div class="chat-area" id="chatContainer">
+            <div class="chat-date">Today</div>
+
+            <div class="message bot">
+                <div class="bubble">
+                    Hello! I'm your MY AI Assistant. I can help you with your plans, advice, and
+                    tips. How can I help you today?
+                </div>
+                <div class="feedback-btns">
+                    <button class="fb-btn" onclick="toggleMessageFeedback(this, 'positive')"><i
+                            class="far fa-thumbs-up"></i></button>
+                    <button class="fb-btn" onclick="toggleMessageFeedback(this, 'negative')"><i
+                            class="far fa-thumbs-down"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="chat-footer">
+            <div class="input-container">
+                <button class="voice-btn" id="micBtn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <textarea id="userInput" placeholder="Type or speak here..." rows="1"></textarea>
+                <button class="send-btn" id="sendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="legal-snippet">
+                By using this AI assistant, you agree to our terms...
+                <a href="#" id="readMoreLink">read more</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal: Disclaimer -->
+    <div class="modal-overlay" id="disclaimerModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeDisclaimer">&times;</button>
+            <h2>Terms of Use</h2>
+            <div class="modal-body">
+                <p>By using this AI assistant, you acknowledge and agree that MY AI and its affiliates shall not
+                    be held responsible for any consequences arising from the use or interpretation of the information
+                    provided.</p>
+                <p>The use of this Assistant may result in outdated and/or inaccurate outputs. As with any other
+                    Generative AI tool, you must always independently evaluate the accuracy, completeness and validity
+                    of any information provided before relying on it.</p>
+                <p>Users are strongly advised not to share sensitive personal or financial information with the
+                    Assistant.</p>
+                <p>The information provided is for informational and general assistance purposes only. It does not
+                    constitute, nor should it be construed as professional medical, financial or legal advice.</p>
+                <p>MY AI makes no representations or warranties regarding the accuracy, reliability or
+                    applicability of the responses generated by the AI Assistant.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Feedback -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal-content feedback-content">
+            <button class="close-modal" id="closeFeedback">&times;</button>
+            <h2>Enjoying <span class="purple-text">MY AI?</span></h2>
+            <p>How would you rate our service?</p>
+
+            <div class="rating-options">
+                <div class="rate-opt">
+                    <button class="rate-btn" id="positiveFeedbackBtn"><i class="fas fa-thumbs-up"></i></button>
+                    <span>Keep it up!</span>
+                </div>
+                <div class="rate-opt">
+                    <button class="rate-btn" id="negativeFeedbackBtn"><i class="fas fa-thumbs-down"></i></button>
+                    <span>Needs work.</span>
+                </div>
+            </div>
+
+            <p class="feedback-label">Additional Feedback</p>
+            <textarea placeholder="Tell us more about your experience..." id="feedbackText"></textarea>
+
+            <button class="modal-submit-btn" id="submitFeedbackBtn">Submit Feedback</button>
+            <button class="no-thanks-link" id="noThanks">No Thanks</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
